@@ -1,0 +1,9 @@
+[package]
+name = "hello"
+version = "0.1.0"
+authors = ["hydai"]
+edition = "2021"
+
+[[bin]]
+name = "hello"
+path = "src/main.rs"

@@ -1,0 +1,23 @@
+# syntax=docker/dockerfile:1
+
+FROM --platform=$BUILDPLATFORM rust:latest AS buildbase
+WORKDIR /
+RUN <<EOT bash
+	set -ex
+	apt-get update
+	apt-get install -y \
+		git \
+		wget
+	rustup target add wasm32-wasi
+EOT
+
+FROM buildbase AS build
+RUN mkdir -p /hello
+WORKDIR /hello
+COPY Cargo.toml /hello
+COPY src /hello/src
+RUN cargo build --release --target wasm32-wasi
+
+FROM scratch
+ENTRYPOINT ["/hello.wasm", "Hello from", "WasmEdge"]
+COPY --link --from=build /hello/target/wasm32-wasi/release/hello.wasm /hello.wasm
