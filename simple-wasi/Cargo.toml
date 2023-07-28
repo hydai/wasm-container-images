@@ -1,0 +1,12 @@
+[package]
+name = "simple_wasi"
+version = "0.1.0"
+authors = ["hydai"]
+edition = "2021"
+
+[[bin]]
+name = "simple_wasi"
+path = "src/main.rs"
+
+[dependencies]
+rand = "0.7.3"
