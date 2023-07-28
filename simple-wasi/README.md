@@ -5,6 +5,7 @@ In this example, we demonstrate how to run a standalone WASI application from th
 ## Build with docker
 
 ```bash
+export BUILDX_NO_DEFAULT_ATTESTATIONS=1 # Workaround for fixing the building issue.
 docker buildx build --push --platform wasi/wasm -t hydai/wasm-image-demo:simple-wasi .
 ```
 

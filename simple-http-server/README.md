@@ -5,6 +5,7 @@ This demo runs an echo server on `localhost`.
 ## Build
 
 ```shell
+export BUILDX_NO_DEFAULT_ATTESTATIONS=1 # Workaround for fixing the building issue.
 docker buildx build --push --platform wasi/wasm -t hydai/wasm-image-demo:simple-http-server .
 ```
 
