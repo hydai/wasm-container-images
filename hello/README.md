@@ -11,7 +11,7 @@ docker buildx build --push --platform wasi/wasm -t hydai/wasm-image-demo:hello .
 ## Run with docker
 
 ```bash
-docker run \                                                                                              130 ↵  5008  16:05:30
+docker run \
   --runtime=io.containerd.wasmedge.v1 \
   --platform=wasi/wasm \
   hydai/wasm-image-demo:hello
