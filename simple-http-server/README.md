@@ -5,20 +5,22 @@ This demo runs an echo server on `localhost`.
 ## Build
 
 ```shell
-cargo build --target wasm32-wasi --release
+docker buildx build --push --platform wasi/wasm -t hydai/wasm-image-demo:simple-http-server .
 ```
 
 ## Run
 
 ```shell
-wasmedge target/wasm32-wasi/release/http_server.wasm
+docker run \
+  -dp 1234:1234 \
+  --runtime=io.containerd.wasmedge.v1 \
+  --platform=wasi/wasm \
+  hydai/wasm-image-demo:simple-http-server
 ```
 
 ## Test
 
-In another terminal window, do the following.
-
 ```shell
-curl -X POST http://127.0.0.1:1234 -d "name=WasmEdge"
-echo: name=WasmEdge
+curl -X POST http://localhost:1234 -d "Hello=WasmEdge"
+echo: Hello=WasmEdge
 ```
